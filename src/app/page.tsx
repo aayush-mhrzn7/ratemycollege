@@ -1,65 +1,145 @@
-import Image from "next/image";
+import CollegeCard from "@/components/internal/CollegeCard";
+import InformationCard from "@/components/internal/InformationCard";
+import ReviewCard from "@/components/internal/ReviewCard";
+import Testimonials from "@/components/testimonials";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { getCollege, getInformations } from "@/data/college/college";
+import { CollegeApiResponse, InformationApiResponse } from "@/utils/type";
+import {
+  Eye,
+  Search,
+  ShieldCheck,
+  SlidersHorizontal,
+  Star,
+  ThumbsUp,
+  Users,
+} from "lucide-react";
+import { Suspense } from "react";
+import Marquee from "react-fast-marquee";
+const page = async () => {
+  const res = await getCollege<CollegeApiResponse>();
+  const informationResponse = await getInformations<InformationApiResponse>();
+  const tags = [
+    "Bsc. CSIT",
+    "BCA",
+    "MBA",
+    "BBA",
+    "Arts",
+    "Psychology",
+    "All Programs",
+  ];
 
-export default function Home() {
+  const whyChooseUs = [
+    {
+      title: "Verified & Reliable Data",
+      description:
+        "All college information is sourced from verified databases, official portals, and publicly available trusted records. We ensure accurate details on programs, fees, affiliation, and infrastructure so students never have to rely on rumors or outdated information.",
+      icon: <ShieldCheck className="w-8 h-8" />,
+    },
+    {
+      title: "Student-Driven Ratings",
+      description:
+        "Our platform is powered by genuine student voices. Every review comes from real students and alumni who share their actual experiences—helping others understand the strengths, challenges, and campus life of each college.",
+      icon: <Users className="w-8 h-8" />,
+    },
+
+    {
+      title: "Easy Comparison",
+      description:
+        "Compare multiple colleges side-by-side based on ratings, programs, fees, location, and student feedback. Our simplified comparison tool helps you quickly identify which college fits your needs best.",
+      icon: <SlidersHorizontal className="w-8 h-8" />,
+    },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      <section className="h-[60dvh] flex justify-center items-center">
+        <div className="flex justify-center items-center flex-col">
+          <h1 className="text-5xl font-extrabold my-4">
+            Find Your Perfect College in Nepal
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-center text-muted-foreground max-w-[700px] mb-2 text-xl w-full text-wrap">
+            Discover, compare and review colleges across the nation with
+            authentic feedback from students
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+          <search className="w-[700px] my-2 flex gap-2 items-center outline-none ring-0 p-4 rounded-lg border">
+            <Search />
+            <Input
+              placeholder="Search by colleges, programs or locations ....."
+              className="border-none shadow-none text-xl"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <Button>Search</Button>
+          </search>
         </div>
-      </main>
-    </div>
+      </section>
+      <section className="my-28 ">
+        <div className="flex mb-16 justify-center items-center w-full">
+          <div className="max-w-[400px] flex gap-2 items-center">
+            {tags.map((tag_item) => (
+              <Button
+                key={tag_item}
+                variant={"outline"}
+                className="rounded-full"
+              >
+                {tag_item}
+              </Button>
+            ))}
+          </div>
+        </div>
+        <h2 className="text-3xl mb-10 font-bold text-center my-5">
+          Top Rated Colleges
+        </h2>
+        <div className="flex  overflow-auto gap-7 items-center ">
+          <Suspense>
+            {res.results.map((college) => (
+              <CollegeCard
+                key={college.slug}
+                address={college.address}
+                collegeName={college.name}
+                image={college.banner_image}
+              />
+            ))}
+          </Suspense>
+        </div>
+      </section>
+      <section className="my-28">
+        <Testimonials />
+      </section>
+      <section className="my-28 ">
+        <h2 className="text-3xl mb-10 font-bold text-center my-5">
+          Latest Information and News
+        </h2>
+        <div className="flex  overflow-auto gap-7 items-center ">
+          <Suspense>
+            {informationResponse.results.map((information) => (
+              <InformationCard
+                key={information.slug}
+                image={information.featured_image}
+                information_name={information.title}
+              />
+            ))}
+          </Suspense>
+        </div>
+      </section>
+      <section className="my-28">
+        <h2 className="text-3xl mb-10 font-bold text-center my-5">
+          Why Choose Us
+        </h2>
+        <div className="flex gap-10 items-center">
+          {" "}
+          {whyChooseUs.map((item, i) => (
+            <ReviewCard
+              key={i}
+              title={item.title}
+              description={item.description}
+              icon={item.icon}
+            />
+          ))}
+        </div>
+      </section>
+    </>
   );
-}
+};
+
+export default page;
