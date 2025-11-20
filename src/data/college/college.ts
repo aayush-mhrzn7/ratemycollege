@@ -13,4 +13,12 @@ const getInformations = async <T>(): Promise<T> => {
   return (await res.json()) as T;
 };
 
-export { getCollege, getInformations };
+const getCollegeDetails = async <T>(): Promise<T> => {
+  const res = await fetch(
+    "https://base.collegeinfonepal.com/api/college/swastik-college/"
+  );
+  if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
+  return (await res.json()) as T;
+};
+
+export { getCollege, getInformations, getCollegeDetails };

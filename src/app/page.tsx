@@ -5,21 +5,12 @@ import Testimonials from "@/components/testimonials";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getCollege, getInformations } from "@/data/college/college";
-import { CollegeApiResponse, InformationApiResponse } from "@/utils/type";
-import {
-  Eye,
-  Search,
-  ShieldCheck,
-  SlidersHorizontal,
-  Star,
-  ThumbsUp,
-  Users,
-} from "lucide-react";
+import { ApiResponse, College, Information } from "@/utils/type";
+import { Search, ShieldCheck, SlidersHorizontal, Users } from "lucide-react";
 import { Suspense } from "react";
-import Marquee from "react-fast-marquee";
 const page = async () => {
-  const res = await getCollege<CollegeApiResponse>();
-  const informationResponse = await getInformations<InformationApiResponse>();
+  const res = await getCollege<ApiResponse<College>>();
+  const informationResponse = await getInformations<ApiResponse<Information>>();
   const tags = [
     "Bsc. CSIT",
     "BCA",
