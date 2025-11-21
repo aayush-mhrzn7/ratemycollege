@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { getCollegeDetails } from "@/data/college/college";
 import { ApiResponse, CollegeDetail, CourseDetail } from "@/utils/type";
 import { Pen, Star } from "lucide-react";
@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CourseTab, OverviewTab, ReviewTab } from "./_components";
 import { getCourses } from "@/data/course/course";
+import Link from "next/link";
 const page = async () => {
   const collegeDetail = await getCollegeDetails<CollegeDetail>();
   const courseData = await getCourses<ApiResponse<CourseDetail>>();
@@ -42,9 +43,15 @@ const page = async () => {
               ))}
               4 (150 reviews)
             </span>
-            <Button className="font-semibold">
-              Write a Review <Pen />
-            </Button>
+            <Link
+              href={"1/review"}
+              className={buttonVariants({
+                className: "font-semibold",
+              })}
+            >
+              Write a Review for swastik college
+              <Pen />
+            </Link>
           </div>
         </div>
       </section>
