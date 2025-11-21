@@ -16,7 +16,7 @@ const CollegeCard = ({
       <Image
         src={image}
         alt={collegeName}
-        className="w-[400px] h-[300px] rounded-t-xl object-cover"
+        className="w-full h-[300px] rounded-t-xl object-cover"
         width={400}
         height={400}
       />

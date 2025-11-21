@@ -1,6 +1,6 @@
-const getCollege = async <T>(): Promise<T> => {
+const getCollege = async <T>({ size = 10 }: { size?: number }): Promise<T> => {
   const res = await fetch(
-    "https://base.collegeinfonepal.com/api/college/?size=10"
+    "https://base.collegeinfonepal.com/api/college/?size=" + String(size)
   );
   if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
   return (await res.json()) as T;

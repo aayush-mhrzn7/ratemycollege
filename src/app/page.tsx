@@ -9,7 +9,7 @@ import { ApiResponse, College, Information } from "@/utils/type";
 import { Search, ShieldCheck, SlidersHorizontal, Users } from "lucide-react";
 import { Suspense } from "react";
 const page = async () => {
-  const res = await getCollege<ApiResponse<College>>();
+  const collegesData = await getCollege<ApiResponse<College>>({});
   const informationResponse = await getInformations<ApiResponse<Information>>();
   const tags = [
     "Bsc. CSIT",
@@ -83,7 +83,7 @@ const page = async () => {
         </h2>
         <div className="flex  overflow-auto gap-7 items-center ">
           <Suspense>
-            {res.results.map((college) => (
+            {collegesData.results.map((college) => (
               <CollegeCard
                 key={college.slug}
                 address={college.address}
