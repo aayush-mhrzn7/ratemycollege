@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CollegeDetail, CourseDetail } from "@/utils/type";
+import { ApiResponse, CollegeDetail, CourseDetail } from "@/utils/type";
 import { Building, Car, Clock, Earth, Mail, MapPin, Phone } from "lucide-react";
 import React from "react";
 
@@ -87,22 +87,26 @@ const OverviewTab = ({ data }: { data: CollegeDetail }) => {
     </section>
   );
 };
-const CourseTab = ({ data }: { data: CourseDetail }) => {
+const CourseTab = ({ data }: { data: ApiResponse<CourseDetail> }) => {
   return (
-    <Card>
-      <CardContent>
-        <CardTitle className="text-xl">{data.name}</CardTitle>
-        <CardDescription className="">
-          <span className="flex gap-2 items-center my-2">
-            <Clock className="size-4" /> {data.duration.name}
-          </span>
-          <span className="flex gap-2 items-center my-2">
-            <Building className="size-4" />
-            {data.affiliation.name}
-          </span>
-        </CardDescription>
-      </CardContent>
-    </Card>
+    <div className=" gap-7 grid grid-cols-2">
+      {data.results.map((course) => (
+        <Card key={course.id}>
+          <CardContent>
+            <CardTitle className="text-xl">{course.name}</CardTitle>
+            <CardDescription className="">
+              <span className="flex gap-2 items-center my-2">
+                <Clock className="size-4" /> {course.duration.name}
+              </span>
+              <span className="flex gap-2 items-center my-2">
+                <Building className="size-4" />
+                {course.affiliation.name}
+              </span>
+            </CardDescription>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   );
 };
 const ReviewTab = ({ data }: { data: CollegeDetail }) => {

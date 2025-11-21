@@ -58,10 +58,8 @@ const page = async () => {
           <TabsContent value="overview" className="w-full">
             <OverviewTab data={collegeDetail} />
           </TabsContent>
-          <TabsContent className=" gap-7 grid grid-cols-2" value="programs">
-            {courseData.results.map((course) => (
-              <CourseTab data={course} />
-            ))}
+          <TabsContent className="" value="programs">
+            <CourseTab data={courseData} />
           </TabsContent>
           <TabsContent value="reviews" className="w-full">
             <div className="flex flex-col">
