@@ -101,24 +101,7 @@ const page = async () => {
           <Testimonials />
         </section>
       </article>
-      <article className="my-18 p-10 bg-sidebar ">
-        <section className=" max-w-[1700px] mx-auto  ">
-          <h2 className="text-3xl mb-10 font-bold text-center my-5">
-            Latest Information and News
-          </h2>
-          <div className="flex  overflow-auto gap-7 items-center ">
-            <Suspense>
-              {informationResponse.results.map((information) => (
-                <InformationCard
-                  key={information.slug}
-                  image={information.featured_image}
-                  information_name={information.title}
-                />
-              ))}
-            </Suspense>
-          </div>
-        </section>
-      </article>
+
       <article className=" max-w-[1700px] mx-auto ">
         <section className="my-40">
           <h2 className="text-3xl mb-10 font-bold text-center my-5">
@@ -138,7 +121,7 @@ const page = async () => {
         </section>
       </article>
       <article className="p-10 bg-sidebar ">
-        <section className="  h-[500px] p-10 flex bg-sidebar justify-center flex-col  relative">
+        <section className=" max-w-[1700px] mx-auto h-[500px] p-10 flex bg-sidebar justify-center flex-col  relative">
           <h6 className="text-[40px] font-black">
             “Students Helping Students — Share Your Review!”
           </h6>

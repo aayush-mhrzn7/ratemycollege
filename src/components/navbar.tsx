@@ -3,13 +3,14 @@ import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/logo";
 import { Search } from "lucide-react";
 import Link from "next/link";
+import Avatar from "./internal/Avatar";
 
 const Navbar = () => {
   return (
     <nav className="fixed top-6  inset-x-4 h-16 shadow-sm shadow-primary bg-background border max-w-(--breakpoint-xl) mx-auto rounded-full z-20">
       <div className="h-full flex items-center justify-between mx-auto px-4">
         <div className="flex items-center gap-2 md:gap-6">
-          <Link href={"/"} className="font-black text-xl">
+          <Link href={"/"} className="font-extrabold text-xl">
             RateMy<span className="text-primary">College</span>.np
           </Link>
 
@@ -23,13 +24,10 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <Button
-            size="icon"
-            className="bg-muted text-foreground hover:bg-accent shadow-none rounded-full md:hidden"
-          >
-            <Search className="h-5! w-5!" />
-          </Button>
-          <Link href={"/login"}>
+          <Link href={"/profile"}>
+            <Avatar />
+          </Link>
+          {/* <Link href={"/login"}>
             <Button
               variant="outline"
               className="hidden sm:inline-flex rounded-full cursor-pointer"
@@ -40,7 +38,7 @@ const Navbar = () => {
           <Link href={"/signup"}>
             {" "}
             <Button className="rounded-full cursor-pointer">Get Started</Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </nav>

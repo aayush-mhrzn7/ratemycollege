@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Star } from "lucide-react";
 import Marquee from "react-fast-marquee";
+import StudentReviewDetail from "./internal/StudentReviewDetail";
 const testimonials = [
   {
     id: 1,
@@ -117,32 +118,46 @@ export const TestimonialList = () =>
   ));
 export const SecondaryTestimonialList = () =>
   testimonials.map((testimonial) => (
-    <div key={testimonial.id} className="border-2 border-border rounded-xl p-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Avatar>
-            <AvatarFallback className="text-xl font-medium bg-primary text-primary-foreground">
-              {testimonial.name.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
+    <StudentReviewDetail
+      key={testimonial.id}
+      trigger={
+        <div
+          key={testimonial.id}
+          className="border-2 border-border rounded-xl p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Avatar>
+                <AvatarFallback className="text-xl font-medium bg-primary text-primary-foreground">
+                  {testimonial.name.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
 
-          <div className="flex flex-col ">
-            {" "}
-            <div>
-              <p className="text-lg font-semibold">{testimonial.name}</p>
-              <p className="text-sm text-gray-500">
-                {testimonial.designation} at {testimonial.college}
-              </p>
-            </div>
-            <div className="flex gap-2 items-center my-2">
-              {Array.from({ length: testimonial.stars }).map((item, index) => (
-                <Star key={index} className="size-4 text-yellow-500" />
-              ))}
+              <div className="flex items-start justify-start flex-col ">
+                {" "}
+                <div>
+                  <p className="text-lg text-start font-semibold">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {testimonial.designation} at {testimonial.college}
+                  </p>
+                </div>
+                <div className="flex gap-2 items-center my-2">
+                  {Array.from({ length: testimonial.stars }).map(
+                    (item, index) => (
+                      <Star key={index} className="size-4 text-yellow-500" />
+                    )
+                  )}
+                </div>
+              </div>
             </div>
           </div>
+          <p className="mt-5 text-[17px] text-start">
+            {testimonial.testimonial}
+          </p>
         </div>
-      </div>
-      <p className="mt-5 text-[17px]">{testimonial.testimonial}</p>
-    </div>
+      }
+    />
   ));
 export default Testimonials;

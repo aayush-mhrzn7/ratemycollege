@@ -3,6 +3,7 @@ const getCollege = async <T>({ size = 10 }: { size?: number }): Promise<T> => {
     "https://base.collegeinfonepal.com/api/college/?size=" + String(size)
   );
   if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
+
   return (await res.json()) as T;
 };
 const getInformations = async <T>(): Promise<T> => {

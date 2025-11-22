@@ -1,19 +1,20 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { getCollegeDetails } from "@/data/college/college";
 import { ApiResponse, CollegeDetail, CourseDetail } from "@/utils/type";
-import { Pen, Star } from "lucide-react";
+import { Book, Bookmark, Pen, Star } from "lucide-react";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CourseTab, OverviewTab, ReviewTab } from "./_components";
 import { getCourses } from "@/data/course/course";
 import Link from "next/link";
+import StudentReviewDetail from "@/components/internal/StudentReviewDetail";
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug;
 
   const collegeDetail = await getCollegeDetails<CollegeDetail>({ slug });
   const courseData = await getCourses<ApiResponse<CourseDetail>>();
   return (
-    <>
+    <article className="max-w-[1700px] mx-auto p-2 md:pg-6 lg:p-10">
       <section className="p-4 relative">
         <Image
           height={400}
@@ -77,7 +78,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           </TabsContent>
         </Tabs>
       </section>
-    </>
+    </article>
   );
 };
 
