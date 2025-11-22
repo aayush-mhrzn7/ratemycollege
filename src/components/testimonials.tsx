@@ -1,66 +1,66 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Star } from "lucide-react";
-
+import Marquee from "react-fast-marquee";
 const testimonials = [
   {
     id: 1,
-    name: "John Doe",
-    designation: "Software Engineer",
+    name: "Aayush Shrestha",
+    designation: "BSc CSIT Student",
     stars: 4,
-    company: "TechCorp",
+    college: "Tribhuvan University",
     testimonial:
-      "This product has completely transformed the way we work. The efficiency and ease of use are unmatched!",
-    avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+      "The course structure is solid and the teachers are supportive. Practical exposure is improving and the environment is great for tech enthusiasts.",
+    avatar: "https://randomuser.me/api/portraits/men/11.jpg",
   },
   {
     id: 2,
-    name: "Sophia Lee",
-    designation: "Data Analyst",
-    company: "InsightTech",
+    name: "Sneha Gurung",
+    designation: "BBA Student",
+    college: "Kathmandu University School of Management",
     stars: 2,
     testimonial:
-      "This tool has saved me hours of work! The analytics and reporting features are incredibly powerful.",
-    avatar: "https://randomuser.me/api/portraits/women/6.jpg",
+      "The program is good but the workload is intense. Facilities are great, but management can be slow at times.",
+    avatar: "https://randomuser.me/api/portraits/women/16.jpg",
   },
   {
     id: 3,
-    name: "Michael Johnson",
-    designation: "UX Designer",
+    name: "Bikash Tamang",
+    designation: "BIT Student",
     stars: 4,
-    company: "DesignPro",
+    college: "Pokhara University",
     testimonial:
-      "An amazing tool that simplifies complex tasks. Highly recommended for professionals in the industry.",
-    avatar: "https://randomuser.me/api/portraits/men/3.jpg",
+      "The coursework is well-balanced with practicals. Teachers are experienced and the learning environment is peaceful and student-friendly.",
+    avatar: "https://randomuser.me/api/portraits/men/13.jpg",
   },
   {
     id: 4,
-    name: "Emily Davis",
-    designation: "Marketing Specialist",
-    company: "BrandBoost",
+    name: "Prakriti Shah",
+    designation: "BHM Student",
+    college: "GoldenGate International College",
     testimonial:
-      "I've seen a significant improvement in our team's productivity since we started using this service.",
-    avatar: "https://randomuser.me/api/portraits/women/4.jpg",
+      "Good facilities and friendly instructors. The hands-on training and exposure to the hospitality industry are strong points.",
+    avatar: "https://randomuser.me/api/portraits/women/14.jpg",
     stars: 4,
   },
   {
     id: 5,
-    name: "Daniel Martinez",
-    designation: "Full-Stack Developer",
-    company: "CodeCrafters",
+    name: "Saurav Adhikari",
+    designation: "BE Computer Student",
+    college: "Pulchowk Engineering Campus",
     testimonial:
-      "The best investment we've made! The support team is also super responsive and helpful.",
-    avatar: "https://randomuser.me/api/portraits/men/5.jpg",
+      "One of the best engineering environments in Nepal. The competition is tough but it pushes you to grow every day.",
+    avatar: "https://randomuser.me/api/portraits/men/15.jpg",
     stars: 4,
   },
   {
     id: 6,
-    name: "Jane Smith",
-    designation: "Product Manager",
+    name: "Riya KC",
+    designation: "BSc Nursing Student",
     stars: 4,
-    company: "InnovateX",
+    college: "Patan Academy of Health Sciences",
     testimonial:
-      "The user experience is top-notch! The interface is clean, intuitive, and easy to navigate.",
-    avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+      "The teaching methodology is exceptional and the clinical exposure is unmatched. A great place for aspiring healthcare professionals.",
+    avatar: "https://randomuser.me/api/portraits/women/12.jpg",
   },
 ];
 
@@ -71,9 +71,13 @@ const Testimonials = () => (
         Trending Reviews
       </h2>
 
-      <div className="mt-8 flex gap-8 items-center overflow-auto  relative">
+      <Marquee
+        pauseOnHover
+        pauseOnClick
+        className="mt-8 flex gap-8 items-center overflow-auto  relative"
+      >
         <TestimonialList />
-      </div>
+      </Marquee>
     </div>
   </div>
 );
@@ -82,7 +86,7 @@ export const TestimonialList = () =>
   testimonials.map((testimonial) => (
     <div
       key={testimonial.id}
-      className="min-w-96 max-w-sm border-2 border-border rounded-xl p-6"
+      className=" max-w-sm border-2 mx-3 border-border rounded-xl p-6"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -96,7 +100,9 @@ export const TestimonialList = () =>
             {" "}
             <div>
               <p className="text-lg font-semibold">{testimonial.name}</p>
-              <p className="text-sm text-gray-500">{testimonial.designation}</p>
+              <p className="text-sm text-gray-500">
+                {testimonial.designation} at {testimonial.college}
+              </p>
             </div>
             <div className="flex gap-2 items-center my-2">
               {Array.from({ length: testimonial.stars }).map((item, index) => (
@@ -124,7 +130,9 @@ export const SecondaryTestimonialList = () =>
             {" "}
             <div>
               <p className="text-lg font-semibold">{testimonial.name}</p>
-              <p className="text-sm text-gray-500">{testimonial.designation}</p>
+              <p className="text-sm text-gray-500">
+                {testimonial.designation} at {testimonial.college}
+              </p>
             </div>
             <div className="flex gap-2 items-center my-2">
               {Array.from({ length: testimonial.stars }).map((item, index) => (

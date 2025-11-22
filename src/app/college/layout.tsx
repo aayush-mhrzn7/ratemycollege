@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
-import "./globals.css";
+
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 
@@ -23,7 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${manrope.variable}`}>
         <Navbar />
-        <main className="antialiased "> {children}</main>
+        <main className=" max-w-[1700px] mx-auto p-2 md:pg-6 lg:p-10 antialiased ">
+          {" "}
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

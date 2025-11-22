@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { getCollege, getInformations } from "@/data/college/college";
 import { ApiResponse, College, Information } from "@/utils/type";
 import { Search, ShieldCheck, SlidersHorizontal, Users } from "lucide-react";
+import Image from "next/image";
 import { Suspense } from "react";
 const page = async () => {
   const collegesData = await getCollege<ApiResponse<College>>({});
@@ -45,90 +46,115 @@ const page = async () => {
 
   return (
     <>
-      <section className="h-[60dvh] flex justify-center items-center">
-        <div className="flex justify-center items-center flex-col">
-          <h1 className="text-5xl font-extrabold my-4">
-            Find Your Perfect College in Nepal
-          </h1>
-          <p className="text-center text-muted-foreground max-w-[700px] mb-2 text-xl w-full text-wrap">
-            Discover, compare and review colleges across the nation with
-            authentic feedback from students
-          </p>
-          <search className="w-[700px] my-2 flex gap-2 items-center outline-none ring-0 p-4 rounded-lg border">
-            <Search />
-            <Input
-              placeholder="Search by colleges, programs or locations ....."
-              className="border-none shadow-none text-xl"
-            />
-            <Button>Search</Button>
-          </search>
-        </div>
-      </section>
-      <section className="my-28 ">
-        <div className="flex mb-16 justify-center items-center w-full">
-          <div className="max-w-[400px] flex gap-2 items-center">
-            {tags.map((tag_item) => (
-              <Button
-                key={tag_item}
-                variant={"outline"}
-                className="rounded-full"
-              >
-                {tag_item}
-              </Button>
+      <article className="max-w-[1700px] mx-auto p-2 md:pg-6 lg:p-10 ">
+        <section className="h-[60dvh] flex justify-center items-center">
+          <div className="flex justify-center items-center flex-col">
+            <h1 className="text-5xl font-extrabold my-4">
+              Find Your Perfect College in Nepal
+            </h1>
+            <p className="text-center text-muted-foreground max-w-[700px] mb-2 text-xl w-full text-wrap">
+              Discover, compare and review colleges across the nation with
+              authentic feedback from students
+            </p>
+            <search className="w-[700px] my-2 flex gap-2 items-center outline-none ring-0 p-4 rounded-lg border">
+              <Search />
+              <Input
+                placeholder="Search by colleges, programs or locations ....."
+                className="border-none shadow-none text-xl"
+              />
+              <Button>Search</Button>
+            </search>
+          </div>
+        </section>
+        <section className="my-28 ">
+          <div className="flex mb-16 justify-center items-center w-full">
+            <div className="max-w-[400px] flex gap-2 items-center">
+              {tags.map((tag_item) => (
+                <Button
+                  key={tag_item}
+                  variant={"outline"}
+                  className="rounded-full"
+                >
+                  {tag_item}
+                </Button>
+              ))}
+            </div>
+          </div>
+          <h2 className="text-3xl mb-10 font-bold text-center my-5">
+            Top Rated Colleges
+          </h2>
+          <div className="flex  overflow-auto gap-7 items-center ">
+            <Suspense>
+              {collegesData.results.map((college) => (
+                <CollegeCard
+                  slug={college.slug}
+                  key={college.slug}
+                  address={college.address}
+                  collegeName={college.name}
+                  image={college.banner_image}
+                />
+              ))}
+            </Suspense>
+          </div>
+        </section>
+        <section className="my-28">
+          <Testimonials />
+        </section>
+      </article>
+      <article className="my-18 p-10 bg-sidebar ">
+        <section className=" max-w-[1700px] mx-auto  ">
+          <h2 className="text-3xl mb-10 font-bold text-center my-5">
+            Latest Information and News
+          </h2>
+          <div className="flex  overflow-auto gap-7 items-center ">
+            <Suspense>
+              {informationResponse.results.map((information) => (
+                <InformationCard
+                  key={information.slug}
+                  image={information.featured_image}
+                  information_name={information.title}
+                />
+              ))}
+            </Suspense>
+          </div>
+        </section>
+      </article>
+      <article className=" max-w-[1700px] mx-auto ">
+        <section className="my-40">
+          <h2 className="text-3xl mb-10 font-bold text-center my-5">
+            Why Choose Us
+          </h2>
+          <div className="flex gap-10 items-center">
+            {" "}
+            {whyChooseUs.map((item, i) => (
+              <ReviewCard
+                key={i}
+                title={item.title}
+                description={item.description}
+                icon={item.icon}
+              />
             ))}
           </div>
-        </div>
-        <h2 className="text-3xl mb-10 font-bold text-center my-5">
-          Top Rated Colleges
-        </h2>
-        <div className="flex  overflow-auto gap-7 items-center ">
-          <Suspense>
-            {collegesData.results.map((college) => (
-              <CollegeCard
-                key={college.slug}
-                address={college.address}
-                collegeName={college.name}
-                image={college.banner_image}
-              />
-            ))}
-          </Suspense>
-        </div>
-      </section>
-      <section className="my-28">
-        <Testimonials />
-      </section>
-      <section className="my-28 ">
-        <h2 className="text-3xl mb-10 font-bold text-center my-5">
-          Latest Information and News
-        </h2>
-        <div className="flex  overflow-auto gap-7 items-center ">
-          <Suspense>
-            {informationResponse.results.map((information) => (
-              <InformationCard
-                key={information.slug}
-                image={information.featured_image}
-                information_name={information.title}
-              />
-            ))}
-          </Suspense>
-        </div>
-      </section>
-      <section className="my-28">
-        <h2 className="text-3xl mb-10 font-bold text-center my-5">
-          Why Choose Us
-        </h2>
-        <div className="flex gap-10 items-center">
-          {" "}
-          {whyChooseUs.map((item, i) => (
-            <ReviewCard
-              key={i}
-              title={item.title}
-              description={item.description}
-              icon={item.icon}
-            />
-          ))}
-        </div>
-      </section>
+        </section>
+      </article>
+      <article className="p-10 bg-sidebar ">
+        <section className="  h-[500px] p-10 flex bg-sidebar justify-center flex-col  relative">
+          <h6 className="text-[40px] font-black">
+            “Students Helping Students — Share Your Review!”
+          </h6>
+          <p className="text-xl">
+            Your review today will help the students of tommorrow to choose
+            their future college
+          </p>
+          <Image
+            className="absolute bottom-0 right-3"
+            src={"cta.svg"}
+            alt="sd"
+            width={400}
+            height={300}
+          />
+        </section>
+      </article>
     </>
   );
 };

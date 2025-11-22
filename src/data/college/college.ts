@@ -13,9 +13,9 @@ const getInformations = async <T>(): Promise<T> => {
   return (await res.json()) as T;
 };
 
-const getCollegeDetails = async <T>(): Promise<T> => {
+const getCollegeDetails = async <T>({ slug }: { slug: string }): Promise<T> => {
   const res = await fetch(
-    "https://base.collegeinfonepal.com/api/college/swastik-college/"
+    "https://base.collegeinfonepal.com/api/college/" + slug
   );
   if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
   return (await res.json()) as T;

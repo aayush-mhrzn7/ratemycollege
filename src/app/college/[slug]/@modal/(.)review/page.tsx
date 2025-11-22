@@ -9,12 +9,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const page = () => {
+const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  let open = true;
+  let slug = (await params).slug;
   return (
-    <Dialog>
+    <Dialog defaultOpen={open}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Write a Review for Swastik College</DialogTitle>
+          <DialogTitle className="capitalize">
+            Write a Review for {slug.split("-")[0]}
+          </DialogTitle>
           <DialogDescription>
             Your review today will help the students of tommorrow to choose
             their future college

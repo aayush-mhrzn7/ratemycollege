@@ -44,10 +44,11 @@ export interface CourseDetail {
   slug: string;
   name: string;
   affiliation: Affiliation;
+  university_type?: string;
   duration: Duration;
 }
 
-interface Affiliation {
+export interface Affiliation {
   id: number;
   name: string;
   slug: string;
