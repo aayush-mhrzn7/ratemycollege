@@ -1,4 +1,5 @@
-import { affiliation } from "@/generated/prisma/client";
+import { Affiliation } from "@/generated/prisma/client";
+import { env } from "@/lib/env";
 import { DALResponse } from "@/lib/interface";
 import prisma from "@/lib/prisma";
 
@@ -6,9 +7,9 @@ const getAffiliations = async ({
   page = 1,
 }: {
   page?: number;
-}): Promise<DALResponse<Pick<affiliation, "id" | "name">>> => {
+}): Promise<DALResponse<Pick<Affiliation, "id" | "name">>> => {
   try {
-    const limit = 20;
+    const limit = Number(env.LIMIT);
     const count = await prisma.affiliation.count();
     const noOfPages = Math.ceil(count / limit);
     const currentPage = Math.min(page, noOfPages);
@@ -29,6 +30,7 @@ const getAffiliations = async ({
       data: affiliations,
     };
   } catch (error) {
+    console.log(error);
     return {
       hasNext: false,
       hasPrev: false,

@@ -4,12 +4,14 @@ import { z } from "zod";
 export const env = createEnv({
   server: {
     DATABASE_URL: z.string(),
+    LIMIT: z.string(),
   },
   client: {
     NEXT_PUBLIC_MAX_FILE_SIZE: z.string(),
   },
   // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
   runtimeEnv: {
+    LIMIT: process.env.LIMIT,
     DATABASE_URL: process.env.DATABASE_URL,
     NEXT_PUBLIC_MAX_FILE_SIZE: process.env.NEXT_PUBLIC_MAX_FILE_SIZE,
   },

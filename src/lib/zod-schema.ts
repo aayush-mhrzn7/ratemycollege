@@ -4,7 +4,13 @@ const affiliationSchema = z.object({
   name: z.string("affiliation name is required").min(1),
 });
 
-export { affiliationSchema };
+const courseSchema = z.object({
+  name: z.string(),
+  year: z.string(),
+  affiliationId: z.number(),
+});
+export { affiliationSchema, courseSchema };
 
 type affiliationType = z.infer<typeof affiliationSchema>;
-export type { affiliationType };
+type courseType = z.infer<typeof courseSchema>;
+export type { affiliationType, courseType };
