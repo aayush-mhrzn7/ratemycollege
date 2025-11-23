@@ -14,7 +14,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   let slug = (await params).slug;
   return (
     <Dialog defaultOpen={open}>
-      <DialogContent>
+      <DialogContent className="max-h-[600px] overflow-auto">
         <DialogHeader>
           <DialogTitle className="capitalize">
             Write a Review for {slug.split("-")[0]}
@@ -24,7 +24,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             their future college
           </DialogDescription>
         </DialogHeader>
-        <>{<ReviewModel />}</>
+        <div className="w-[600px]">{<ReviewModel />}</div>
       </DialogContent>
     </Dialog>
   );

@@ -1,3 +1,4 @@
+import CustomDropzone from "@/components/internal/Fileupload";
 import { Button } from "@/components/ui/button";
 import { Flag, GraduationCap, Laptop, School, Star, Users } from "lucide-react";
 import React from "react";
@@ -95,7 +96,9 @@ const ReviewModel = () => {
           className="border w-full p-3 rounded-md my-3"
           placeholder="Share your detailed Experience..  what did you like what did you didnt like"
         ></textarea>
+        <CustomDropzone />
       </div>
+
       <div className="px-4 py-2">
         <Button className="w-full">Submit You're Review</Button>
       </div>
