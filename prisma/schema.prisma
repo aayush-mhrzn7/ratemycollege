@@ -10,7 +10,7 @@ datasource db {
 model User {
   id            String    @id
   name          String
-  email         String
+  email         String    @unique
   emailVerified Boolean   @default(false)
   image         String?
   createdAt     DateTime  @default(now())
@@ -18,14 +18,13 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
-  @@unique([email])
   @@map("user")
 }
 
 model Session {
   id        String   @id
   expiresAt DateTime
-  token     String
+  token     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   ipAddress String?
@@ -33,7 +32,6 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([token])
   @@index([userId])
   @@map("session")
 }
@@ -71,8 +69,8 @@ model Verification {
 }
 
 model College {
-  id            Int      @id @default(autoincrement())
-  name          String
+  id            Int            @id @default(autoincrement())
+  name          String         @unique
   description   String
   phone         String
   website_url   String
@@ -80,19 +78,42 @@ model College {
   college_email String
   key_points    String
   banner_url    String
+  address       String
   college_logo  String
-  created_at    DateTime @default(now())
-  updated_at    DateTime @default(now()) @updatedAt
-  reviews Review[]
-  rating        CollegeRating? // Add this for one-to-one relation
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @default(now()) @updatedAt
+  college_type  CollegeType
+  reviews       Review[]
+  rating        CollegeRating?
+
+  affiliations   CollegeAffiliation[]
+  collegeCourses CollegeCourse[]
+}
+
+enum CollegeType {
+  private
+  public
+  hybrid
 }
 
 model Affiliation {
   id         Int      @id @default(autoincrement())
   name       String   @unique
   created_at DateTime @default(now())
-  courses    Course[]
   updated_at DateTime @default(now()) @updatedAt
+
+  courses             Course[]
+  collegeAffiliations CollegeAffiliation[]
+}
+
+model CollegeAffiliation {
+  id            Int         @id @default(autoincrement())
+  collegeId     Int
+  affiliationId Int
+  college       College     @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  affiliation   Affiliation @relation(fields: [affiliationId], references: [id], onDelete: Cascade)
+
+  @@unique([collegeId, affiliationId])
 }
 
 model Course {
@@ -103,13 +124,18 @@ model Course {
   affiliationId Int
   created_at    DateTime    @default(now())
   updated_at    DateTime    @default(now()) @updatedAt
+
+  colleges CollegeCourse[]
 }
 
-model CollegeRating {
-  id                   Int      @id @default(autoincrement())
-  college_id Int @unique
-  college College @relation(fields:[college_id],references:[id])
-  rating Float
+model CollegeCourse {
+  id        Int     @id @default(autoincrement())
+  collegeId Int
+  courseId  Int
+  college   College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  course    Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([collegeId, courseId])
 }
 
 model Review {
@@ -123,6 +149,13 @@ model Review {
   photos               String[]
   created_at           DateTime @default(now())
   updated_at           DateTime @default(now()) @updatedAt
-  college_id Int
-  college College @relation(fields:[college_id],references:[id])
+  college_id           Int
+  college              College  @relation(fields: [college_id], references: [id], onDelete: Cascade)
+}
+
+model CollegeRating {
+  id         Int     @id @default(autoincrement())
+  college_id Int     @unique
+  college    College @relation(fields: [college_id], references: [id], onDelete: Cascade)
+  rating     Float
 }

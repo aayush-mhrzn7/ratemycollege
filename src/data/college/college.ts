@@ -1,4 +1,4 @@
-const getCollege = async <T>({ size = 10 }: { size?: number }): Promise<T> => {
+const getCollege = async <T>({ size = 300 }: { size?: number }): Promise<T> => {
   const res = await fetch(
     "https://base.collegeinfonepal.com/api/college/?size=" + String(size)
   );
@@ -21,5 +21,16 @@ const getCollegeDetails = async <T>({ slug }: { slug: string }): Promise<T> => {
   if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
   return (await res.json()) as T;
 };
+const getCOllegeCOurse = async <T>({
+  size = 200,
+}: {
+  size?: number;
+}): Promise<T> => {
+  const res = await fetch(
+    "https://base.collegeinfonepal.com/api/course/?size=" + String(size)
+  );
+  if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
 
-export { getCollege, getInformations, getCollegeDetails };
+  return (await res.json()) as T;
+};
+export { getCollege, getInformations, getCollegeDetails, getCOllegeCOurse };

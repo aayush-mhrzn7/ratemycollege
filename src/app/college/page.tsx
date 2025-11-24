@@ -11,11 +11,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { GraduationCap, MapPin, School, Star, X } from "lucide-react";
+import createReview from "./[slug]/actions";
 const page = async () => {
   const collegesData = await getCollege<ApiResponse<College>>({});
-
+  const formData = new FormData();
   return (
-    <article className="pt-22 ">
+    <article className="pt-22 max-w-[1700px] mx-auto">
       <section>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-2">

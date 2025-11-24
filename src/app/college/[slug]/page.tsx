@@ -1,5 +1,5 @@
 import { Button, buttonVariants } from "@/components/ui/button";
-import { getCollegeDetails } from "@/data/college/college";
+import { getCOllegeCOurse, getCollegeDetails } from "@/data/college/college";
 import { ApiResponse, CollegeDetail, CourseDetail } from "@/utils/type";
 import { Book, Bookmark, Pen, Star } from "lucide-react";
 import Image from "next/image";
@@ -12,7 +12,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug;
 
   const collegeDetail = await getCollegeDetails<CollegeDetail>({ slug });
-  const courseData = await getCourses<ApiResponse<CourseDetail>>();
+  const courseData = await getCOllegeCOurse<ApiResponse<CourseDetail>>({});
   return (
     <article className="max-w-[1700px] mx-auto p-2 md:pg-6 lg:p-10">
       <section className="p-4 relative">
