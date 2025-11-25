@@ -6,7 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getCollege, getInformations } from "@/data/college/college";
 import { ApiResponse, College, Information } from "@/utils/type";
-import { Search, ShieldCheck, SlidersHorizontal, Users } from "lucide-react";
+import {
+  GraduationCap,
+  Search,
+  ShieldCheck,
+  SlidersHorizontal,
+  Users,
+} from "lucide-react";
 import Image from "next/image";
 import { Suspense } from "react";
 const page = async () => {
