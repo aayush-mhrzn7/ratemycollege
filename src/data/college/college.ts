@@ -1,4 +1,4 @@
-const getCollege = async <T>({ size = 300 }: { size?: number }): Promise<T> => {
+const getCollege = async <T>({ size = 10 }: { size?: number }): Promise<T> => {
   const res = await fetch(
     "https://base.collegeinfonepal.com/api/college/?size=" + String(size)
   );

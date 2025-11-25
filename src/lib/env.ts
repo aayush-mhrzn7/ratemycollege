@@ -8,10 +8,12 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_MAX_FILE_SIZE: z.string(),
+    NEXT_PUBLIC_LIMIT: z.string(),
   },
   // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
   runtimeEnv: {
     LIMIT: process.env.LIMIT,
+    NEXT_PUBLIC_LIMIT: process.env.NEXT_PUBLIC_LIMIT,
     DATABASE_URL: process.env.DATABASE_URL,
     NEXT_PUBLIC_MAX_FILE_SIZE: process.env.NEXT_PUBLIC_MAX_FILE_SIZE,
   },

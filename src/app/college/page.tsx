@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import { GraduationCap, MapPin, School, Star, X } from "lucide-react";
 import createReview from "./[slug]/actions";
+import CustomPagination from "@/components/internal/CustomPagination";
 const page = async () => {
   const collegesData = await getCollege<ApiResponse<College>>({});
   const formData = new FormData();
@@ -113,6 +114,12 @@ const page = async () => {
               ))}
             </Suspense>
           </div>
+          {/* @ts-ignore */}
+          <CustomPagination
+            currentPage={1}
+            // onPageChange={() => {}}
+            totalPages={Math.ceil(collegesData.count / 10)}
+          />
         </section>
       </div>
     </>

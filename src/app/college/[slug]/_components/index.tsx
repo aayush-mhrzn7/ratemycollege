@@ -23,7 +23,7 @@ const OverviewTab = ({ data }: { data: CollegeDetail }) => {
           </CardHeader>
           <CardContent>
             <CardDescription
-              className="prose-xl text-black text-[20px]"
+              className="text-dark mt-8 text-[20px] leading-7 prose-li text-wrap tracking-[-0.64px] "
               dangerouslySetInnerHTML={{ __html: data.about }}
             ></CardDescription>
           </CardContent>

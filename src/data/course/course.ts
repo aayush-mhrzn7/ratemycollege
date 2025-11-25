@@ -2,7 +2,7 @@ import { Affiliation, Course } from "@/generated/prisma/client";
 import { env } from "@/lib/env";
 import { DALResponse } from "@/lib/interface";
 import prisma from "@/lib/prisma";
-type CourseWithAffiliation = Pick<Course, "id" | "name" | "year"> & {
+export type CourseWithAffiliation = Pick<Course, "id" | "name" | "year"> & {
   affiliation: Pick<Affiliation, "id" | "name">;
 };
 const getCourses = async ({
@@ -11,6 +11,7 @@ const getCourses = async ({
   page?: number;
 }): Promise<DALResponse<CourseWithAffiliation>> => {
   try {
+    console.log(page, "page");
     const limit = Number(env.LIMIT);
     const count = await prisma.course.count();
     const noOfPages = Math.ceil(count / limit);
