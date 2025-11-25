@@ -21,7 +21,7 @@ const CollegeCard = ({
 }) => {
   return (
     <Link href={"/college/" + slug}>
-      <Card className="w-full min-w-[400px]  h-full font-primary  pt-0 ">
+      <Card className="w-full min-w-[350px]  h-full font-primary  pt-0 ">
         <Image
           src={image}
           alt={collegeName}

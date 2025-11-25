@@ -16,7 +16,7 @@ const page = async () => {
   const collegesData = await getCollege<ApiResponse<College>>({});
   const formData = new FormData();
   return (
-    <article className="pt-22 max-w-[1700px] mx-auto">
+    <>
       <section>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-2">
@@ -37,8 +37,8 @@ const page = async () => {
           </Badge>
         </div>
       </section>
-      <div className="flex gap-6 my-10 justify-center">
-        <aside className="w-[400px] bg-[#f6f7f8] rounded-2xl p-3 md:p-10">
+      <div className="flex gap-6 my-10 relative justify-center">
+        <aside className="w-[400px] bg-background sticky top-32 h-fit rounded-2xl p-3 md:p-10">
           <h3 className="text-2xl font-black">Filter College</h3>
           <p>Find youre perfect college</p>
           <div>
@@ -115,7 +115,7 @@ const page = async () => {
           </div>
         </section>
       </div>
-    </article>
+    </>
   );
 };
 

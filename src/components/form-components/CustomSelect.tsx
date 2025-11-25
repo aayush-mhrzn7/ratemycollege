@@ -56,32 +56,30 @@ export function SelectMultiple({
   return (
     <Popover>
       <PopoverTrigger asChild className="w-full">
-        <FormControl>
-          <div className="w-full border border-gray-200 dark:border-gray-800 hover:text-accent-foreground inline-flex items-center justify-start rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 p-2">
-            {selectedOptions?.length > 0 ? (
-              <div className="flex flex-wrap gap-1">
-                {allOptions
-                  .filter((option) => selectedOptions.includes(option.value))
-                  .map((option) => (
-                    <Badge key={option.value}>
-                      <X
-                        className="peer hover:cursor-pointer"
-                        size="14"
-                        onClick={(e) => handleRemove(option.value, e)}
-                      />
-                      <span className="peer-hover:opacity-50">
-                        {option.label}
-                      </span>
-                    </Badge>
-                  ))}
-              </div>
-            ) : (
-              <span className="justify-start text-black/50 dark:text-white/50 font-normal">
-                {placeholder}
-              </span>
-            )}
-          </div>
-        </FormControl>
+        <div className="w-full border border-gray-200 dark:border-gray-800 hover:text-accent-foreground inline-flex items-center justify-start rounded-md text-sm font-medium ring-offset-background h-fit transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 p-2">
+          {selectedOptions?.length > 0 ? (
+            <div className="flex flex-wrap gap-1">
+              {allOptions
+                .filter((option) => selectedOptions.includes(option.value))
+                .map((option) => (
+                  <Badge key={option.value}>
+                    <X
+                      className="peer hover:cursor-pointer"
+                      size="14"
+                      onClick={(e) => handleRemove(option.value, e)}
+                    />
+                    <span className="peer-hover:opacity-50">
+                      {option.label}
+                    </span>
+                  </Badge>
+                ))}
+            </div>
+          ) : (
+            <span className="justify-start text-black/50 dark:text-white/50 font-normal">
+              {placeholder}
+            </span>
+          )}
+        </div>
       </PopoverTrigger>
       <PopoverContent
         className="w-[--radix-popover-trigger-width]"

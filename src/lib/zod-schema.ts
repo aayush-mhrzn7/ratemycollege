@@ -27,16 +27,16 @@ const collegeRatingSchema = z.object({
 });
 
 const collegeSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  phone: z.string(),
-  website_url: z.url(),
-  slug: z.string(),
-  college_email: z.email(),
-  address: z.string(),
-  key_points: z.string(),
-  banner_url: z.string(),
-  college_logo: z.string(),
+  name: z.string().min(1, "Required"),
+  description: z.string().min(1, "Required"),
+  phone: z.string().min(1, "Required"),
+  website_url: z.string().min(1, "Required"),
+  slug: z.string().min(1, "Required"),
+  college_email: z.string().email("Invalid email").min(1, "Required"),
+  address: z.string().min(1, "Required"),
+  key_points: z.string().min(1, "Required"),
+  banner_url: z.string().min(1, "Required"),
+  college_logo: z.string().min(1, "Required"),
 });
 export { affiliationSchema, courseSchema, reviewSchema, collegeSchema };
 
@@ -44,4 +44,4 @@ type affiliationType = z.infer<typeof affiliationSchema>;
 type courseType = z.infer<typeof courseSchema>;
 type reviewType = z.infer<typeof reviewSchema>;
 type collegeType = z.infer<typeof collegeSchema>;
-export type { affiliationType, courseType, reviewType };
+export type { affiliationType, courseType, reviewType, collegeType };
