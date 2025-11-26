@@ -131,13 +131,13 @@ model Affiliation {
 }
 
 model CollegeAffiliation {
-  id            Int         @id @default(autoincrement())
-  collegeId     Int
-  affiliationId Int
-  college       College     @relation(fields: [collegeId], references: [id], onDelete: Cascade)
-  affiliation   Affiliation @relation(fields: [affiliationId], references: [id], onDelete: Cascade)
+  id             Int         @id @default(autoincrement())
+  college_id     Int
+  affiliation_id Int
+  college        College     @relation(fields: [college_id], references: [id], onDelete: Cascade)
+  affiliation    Affiliation @relation(fields: [affiliation_id], references: [id], onDelete: Cascade)
 
-  @@unique([collegeId, affiliationId])
+  @@unique([college_id, affiliation_id])
 }
 
 model Course {
@@ -153,13 +153,13 @@ model Course {
 }
 
 model CollegeCourse {
-  id        Int     @id @default(autoincrement())
-  collegeId Int
-  courseId  Int
-  college   College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
-  course    Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id         Int     @id @default(autoincrement())
+  college_id Int
+  course_id  Int
+  college    College @relation(fields: [college_id], references: [id], onDelete: Cascade)
+  course     Course  @relation(fields: [course_id], references: [id], onDelete: Cascade)
 
-  @@unique([collegeId, courseId])
+  @@unique([college_id, course_id])
 }
 
 model Review {
