@@ -69,23 +69,23 @@ model Verification {
 }
 
 model College {
-  id            Int            @id @default(autoincrement())
-  name          String         @unique
-  description   String
-  phone         String
-  website_url   String
-  slug          String
-  college_email String
-  key_points    String
-  banner_url    String
-  address       String
-  college_logo  String
-  created_at    DateTime       @default(now())
-  updated_at    DateTime       @default(now()) @updatedAt
-  college_type  CollegeType
-  reviews       Review[]
-  rating        CollegeRating?
-
+  id             Int                  @id @default(autoincrement())
+  name           String               @unique
+  description    String
+  phone          String
+  website_url    String
+  slug           String               @unique
+  college_email  String
+  key_points     String
+  banner_url     String
+  address        String
+  college_logo   String
+  created_at     DateTime             @default(now())
+  updated_at     DateTime             @default(now()) @updatedAt
+  college_type   CollegeType
+  reviews        Review[]
+  rating         CollegeRating?
+  features       CollegeFeature[]
   affiliations   CollegeAffiliation[]
   collegeCourses CollegeCourse[]
 }
@@ -96,12 +96,36 @@ enum CollegeType {
   hybrid
 }
 
-model Affiliation {
-  id         Int      @id @default(autoincrement())
-  name       String   @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now()) @updatedAt
+model Feature {
+  id          Int              @id @default(autoincrement())
+  name        String           @unique // "Scholarship Available"
+  slug        String           @unique // "scholarship-available"
+  colleges    CollegeFeature[]
+  description String? // Optional description
+  created_at  DateTime         @default(now())
+  updated_at  DateTime         @updatedAt
+}
 
+model CollegeFeature {
+  id         Int      @id @default(autoincrement())
+  feature    Feature? @relation(fields: [feature_id], references: [id], onDelete: Cascade)
+  feature_id Int
+  college    College? @relation(fields: [college_id], references: [id], onDelete: Cascade)
+  college_id Int
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([college_id, feature_id])
+  @@index([college_id])
+  @@index([feature_id])
+}
+
+model Affiliation {
+  id                  Int                  @id @default(autoincrement())
+  name                String               @unique
+  created_at          DateTime             @default(now())
+  updated_at          DateTime             @default(now()) @updatedAt
   courses             Course[]
   collegeAffiliations CollegeAffiliation[]
 }
@@ -120,7 +144,7 @@ model Course {
   id            Int         @id @default(autoincrement())
   year          String
   name          String
-  affiliation   Affiliation @relation(fields: [affiliationId], references: [id])
+  affiliation   Affiliation @relation(fields: [affiliationId], references: [id], onDelete: Cascade)
   affiliationId Int
   created_at    DateTime    @default(now())
   updated_at    DateTime    @default(now()) @updatedAt
