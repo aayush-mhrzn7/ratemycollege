@@ -107,7 +107,7 @@ model Feature {
 }
 
 model CollegeFeature {
-  id         Int      @id @default(autoincrement())
+  id         Int      @default(autoincrement())
   feature    Feature? @relation(fields: [feature_id], references: [id], onDelete: Cascade)
   feature_id Int
   college    College? @relation(fields: [college_id], references: [id], onDelete: Cascade)
@@ -116,6 +116,7 @@ model CollegeFeature {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
+  @@id([college_id, feature_id])
   @@unique([college_id, feature_id])
   @@index([college_id])
   @@index([feature_id])
@@ -131,12 +132,13 @@ model Affiliation {
 }
 
 model CollegeAffiliation {
-  id             Int         @id @default(autoincrement())
+  id             Int         @default(autoincrement())
   college_id     Int
   affiliation_id Int
   college        College     @relation(fields: [college_id], references: [id], onDelete: Cascade)
   affiliation    Affiliation @relation(fields: [affiliation_id], references: [id], onDelete: Cascade)
 
+  @@id([college_id, affiliation_id])
   @@unique([college_id, affiliation_id])
 }
 
@@ -153,12 +155,13 @@ model Course {
 }
 
 model CollegeCourse {
-  id         Int     @id @default(autoincrement())
+  id         Int     @default(autoincrement())
   college_id Int
   course_id  Int
   college    College @relation(fields: [college_id], references: [id], onDelete: Cascade)
   course     Course  @relation(fields: [course_id], references: [id], onDelete: Cascade)
 
+  @@id([college_id, course_id])
   @@unique([college_id, course_id])
 }
 

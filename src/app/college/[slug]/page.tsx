@@ -1,15 +1,30 @@
-import { Button, buttonVariants } from "@/components/ui/button";
-import { getCOllegeCOurse, getCollegeDetails } from "@/data/college/college";
-import { ApiResponse, CollegeDetail, CourseDetail } from "@/utils/type";
-import { Book, Bookmark, Pen, Star } from "lucide-react";
-import Image from "next/image";
+export const revalidate = 3600;
+import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CourseTab, OverviewTab, ReviewTab } from "./_components";
-import { getCourses } from "@/data/course/course";
+import {
+  getCollege,
+  getCOllegeCOurse,
+  getCollegeDetails,
+} from "@/data/college/college";
+import {
+  ApiResponse,
+  College,
+  CollegeDetail,
+  CourseDetail,
+} from "@/utils/type";
+import { Pen, Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import StudentReviewDetail from "@/components/internal/StudentReviewDetail";
+import { CourseTab, OverviewTab, ReviewTab } from "./_components";
+
+export async function generateStaticParams() {
+  const colleges = await getCollege<ApiResponse<College>>({ size: 300 });
+  return colleges.results.map((college) => ({
+    slug: college.slug,
+  }));
+}
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const slug = (await params).slug;
+  const { slug } = await params;
 
   const collegeDetail = await getCollegeDetails<CollegeDetail>({ slug });
   const courseData = await getCOllegeCOurse<ApiResponse<CourseDetail>>({});

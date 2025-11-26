@@ -96,7 +96,7 @@ const ReviewModel = () => {
           className="border w-full p-3 rounded-md my-3"
           placeholder="Share your detailed Experience..  what did you like what did you didnt like"
         ></textarea>
-        <CustomDropzone />
+        {/* <CustomDropzone /> */}
       </div>
 
       <div className="px-4 py-2">

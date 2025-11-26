@@ -36,7 +36,7 @@ const CollegeCard = ({
           <CardDescription>
             <span className="block my-2">{address}</span>
             <div className="flex gap-2 items-center">
-              <Star className="size-3 text-yellow-500" />{" "}
+              <Star className="size-3 text-yellow-500" />
               <span className="font-semibold block ">4.8 </span>(720 Reviews)
             </div>
             {viewChips && (

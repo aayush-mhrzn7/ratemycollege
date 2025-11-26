@@ -1,3 +1,4 @@
+"use client";
 import { openPeeps } from "@dicebear/collection";
 import { createAvatar } from "@dicebear/core";
 import Image from "next/image";

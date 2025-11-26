@@ -20,6 +20,7 @@ import CustomPagination from "./CustomPagination";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
+
 const CustomTable = <T,>({
   columns,
   data,
@@ -52,6 +53,7 @@ const CustomTable = <T,>({
     const params = new URLSearchParams(searchParams);
     params.set("page", page.toString());
     router.push(`?${params.toString()}`);
+    // revalidatePath("/dashboard/courses");
   };
   const selectedRows = table.getFilteredSelectedRowModel().rows;
   console.log(selectedRows);
